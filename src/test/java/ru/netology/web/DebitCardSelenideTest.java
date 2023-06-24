@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -57,18 +59,11 @@ public class DebitCardSelenideTest {
     }
 
     @Test
-    public void shouldIsSelectedCheckedCheckBoxSelenide() {
+    public void shouldInvalidCheckBox() {
         $("[data-test-id=name] input").setValue("Александр Мужев-Петров");
         $("[data-test-id=phone] input").setValue("+79120009999");
-        $(".checkbox__box").click();
-        $(".checkbox_checked").isSelected();
-    }
-
-    @Test
-    public void shouldUnCheckedCheckBoxSelenide() {
-        $("[data-test-id=name] input").setValue("Александр Мужев-Петров");
-        $("[data-test-id=phone] input").setValue("+79120009999");
-        boolean checkbox = $(".checkbox__box").isSelected();
-        Assertions.assertFalse(checkbox);
+        $("button").click();
+        WebElement checkbox = $("[data-test-id=agreement].input_invalid");
+        checkbox.isSelected();
     }
 }
